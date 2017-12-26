@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Descriptions</title>
+    <link href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.2/css/bootstrap.min.css">
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.2/js/bootstrap.min.js"></script>
+    <script src="https://code.jquery.com/jquery-3.2.1.min.js" integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4=" crossorigin="anonymous"></script>
+</head>
+<body>
+    <h1>Descriptions </h1>
+    <div class="container">
+      <form method="get" id="textForm" action="">
+          <button class="btn btn-primary btn-lg" type="submit"> Load Text </button>
+      </form>
+      <div class="container" id="text">
+
+    </div>
+    <script>
+        $(document).ajaxStart(function () {
+        console.log('Ajax started!');
+    });
+      $(document).on('submit', '#textForm', function (e) {
+          e.preventDefault();
+          $.ajax({
+              url: '/parseText',
+              type: 'GET',
+              data: {},
+              dataType: 'json',
+              success: function (data) {
+                  console.log(data.length);
+                  console.log(data);
+
+                  var i;
+                  for (i=0; i <= data.length; ++i){
+                      $('#text').append('<h2>'+data[i]+'</h2>');
+                  }
+
+              }
+          })
+      })
+    </script>
+</body>
+</html>
